@@ -34,14 +34,14 @@ async function exportCSV(repoName) {
             }
         }
 
-        const lines = ['id,title,body'];
+        const lines = ['id,url,title,body'];
         let page = 1;
         let issues = [];
         do {
             console.log(`fetching page ${page}...`);
             issues = await getIssues(repoName, state, page);
             issues.forEach(issue => {
-                lines.push(`${issue.number},${issue.title.replace(/"/g, '""')},"${issue.body.replace(/"/g, '""')}"`);
+                lines.push(`${issue.number},${issue.url},${issue.title.replace(/"/g, '""')},"${issue.body.replace(/"/g, '""')}"`);
             });
             if (issues.length) {
                 console.log(`${issues.length} issue(s) found.`);
